@@ -358,7 +358,7 @@ public class SimpleSelect
 								ICursor []cursors = new ICursor[parallelNumber];
 								for (int i = 0; i < parallelNumber; ++i) 
 								{
-									cursors[i] = meta.cursor(null, fields, where, null, null, null, i+1, parallelNumber, ctx);
+									cursors[i] = meta.cursor(null, fields, where, null, null, null, i+1, parallelNumber, (Integer) null, ctx);
 								}
 								cursors2[z] = new MultipathCursors(cursors, ctx);
 							}
@@ -705,7 +705,7 @@ public class SimpleSelect
 						if(icursor != null)
 						{
 							Sequence seq = icursor.peek(1);
-							System.out.println(seq);
+							//System.out.println(seq);
 							if(seq != null)
 							{
 								this.struct = seq.dataStruct();
@@ -728,7 +728,7 @@ public class SimpleSelect
 				this.where = where; //还原提前过滤
 			}
 			
-			System.out.println("this.struct="+Arrays.toString(this.struct.getFieldNames()));
+			//System.out.println("this.struct="+Arrays.toString(this.struct.getFieldNames()));
 			
 			return this.struct;
 		}
@@ -3603,7 +3603,8 @@ public class SimpleSelect
 				while(pos < tableNext)
 				{
 					tableName = tableName + tokens[pos].getOriginString();
-					tableName = tableName + tokens[pos].getSpaces();
+					//xingjl 20230323 from D://test/1集算器/emps.txt，去掉1后面空格 
+					//tableName = tableName + tokens[pos].getSpaces();
 					pos++;
 				}
 				tableName = tableName.trim();
